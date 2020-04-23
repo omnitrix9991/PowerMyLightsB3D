@@ -32,7 +32,7 @@ class ChangeLightPower_OT_operator(bpy.types.Operator):
                 i.data.energy = (bpy.context.scene.powerpercent * oldenergy)
 
         bpy.context.scene.powerpercent = 1
-        print(listoflights)
+        
         return {'FINISHED'}
 
 
