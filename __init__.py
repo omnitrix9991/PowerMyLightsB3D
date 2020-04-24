@@ -12,8 +12,9 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-from . powermylights import (ChangeLightPower_OT_operator,ChangePower_PT_Panel,MYLIGHTS_PT_Panel)
 import bpy
+from . powermylights import (ChangeLightPower_OT_operator,ChangePower_PT_Panel,MYLIGHTS_PT_Panel)
+
 
 bl_info = {
     "name": "PowerMyLights",
@@ -28,23 +29,32 @@ bl_info = {
 }
 
 
-classes = [ChangeLightPower_OT_operator,
-           ChangePower_PT_Panel, MYLIGHTS_PT_Panel]
+
+
+class LightAddonProperties(bpy.types.PropertyGroup):
+    powerpercent: bpy.props.IntProperty(default=100, min=1, step=10)
+    checkto_applya: bpy.props.BoolProperty(default=True)
+
+    collectioninfo:  bpy.props.PointerProperty(type=bpy.types.Collection)
+
+
+classes = [LightAddonProperties,ChangeLightPower_OT_operator,ChangePower_PT_Panel,MYLIGHTS_PT_Panel]
+
 
 def register():
     for c in classes:
         bpy.utils.register_class(c)
-
-    bpy.types.Scene.powerpercent = bpy.props.FloatProperty(
-            default=1, min=0.01, step=1)    
+    bpy.types.Scene.light_tool = bpy.props.PointerProperty(type=LightAddonProperties)
 
 
 def unregister():
     for c in classes:
         bpy.utils.unregister_class(c)
 
-    del bpy.types.Scene.powerpercent
+    del bpy.types.Scene.light_tool
 
 
 if __name__ == "__main__":
     register()
+
+
