@@ -19,12 +19,14 @@ class ChangeLightPower_OT_operator(bpy.types.Operator):
 
     @classmethod
     def poll(cls, context):
-
+        light_tool = bpy.context.scene.light_tool
         if len(bpy.context.scene.objects) == 0:
 
             return False
         else:
-            if bpy.context.scene.light_tool.checkto_applya == True:
+            if light_tool.powerpercent == 100:
+                return False
+            elif bpy.context.scene.light_tool.checkto_applya == True:
                 return True
             elif bpy.context.scene.light_tool.collectioninfo is None:
                 return False
@@ -94,8 +96,8 @@ class ChangePower_PT_Panel(bpy.types.Panel):
             col.label(text="Power = x% of current Power's :")
             col.prop(light_tool, "powerpercent",
                      text='(x) ')
-            if light_tool.powerpercent != 100:
-                col.operator('view3d.clp', text='Apply')
+            
+            col.operator('view3d.clp', text='Apply')
             col = self.layout.column()
         else:
             col = self.layout.column()
@@ -105,8 +107,8 @@ class ChangePower_PT_Panel(bpy.types.Panel):
             col.label(text="Power = x% of current Power's :")
             col.prop(light_tool, "powerpercent",
                      text='(x) ')
-            if light_tool.powerpercent != 100:
-                col.operator('view3d.clp', text='Apply')
+            
+            col.operator('view3d.clp', text='Apply')
             col = self.layout.column()
 
 
