@@ -32,7 +32,7 @@ bl_info = {
 
 
 class LightAddonProperties(bpy.types.PropertyGroup):
-    powerpercent: bpy.props.IntProperty(default=100, min=1, step=10)
+    powerpercent: bpy.props.IntProperty(default=100, min=1,soft_max =300,step=10)
     checkto_applya: bpy.props.BoolProperty(default=True)
 
     collectioninfo:  bpy.props.PointerProperty(type=bpy.types.Collection)

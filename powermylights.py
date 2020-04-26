@@ -95,7 +95,7 @@ class ChangePower_PT_Panel(bpy.types.Panel):
             col = self.layout.column()
             col.label(text="Power = x% of current Power's :")
             col.prop(light_tool, "powerpercent",
-                     text='(x) ')
+                     text='(x) ',slider=True)
             
             col.operator('view3d.clp', text='Apply')
             col = self.layout.column()
@@ -106,7 +106,7 @@ class ChangePower_PT_Panel(bpy.types.Panel):
             col.prop(light_tool, "collectioninfo", text="")
             col.label(text="Power = x% of current Power's :")
             col.prop(light_tool, "powerpercent",
-                     text='(x) ')
+                     text='(x) ',slider=True)
             
             col.operator('view3d.clp', text='Apply')
             col = self.layout.column()
